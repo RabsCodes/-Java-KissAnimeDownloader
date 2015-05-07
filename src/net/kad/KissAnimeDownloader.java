@@ -5,9 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import net.kad.io.TextReader;
-import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -54,7 +54,9 @@ public class KissAnimeDownloader {
 			urls.add(element.getAttribute("href"));
 		}
 		String urlList = new String();
-		for (String url : urls) {
+		ListIterator<String> iterator = urls.listIterator(urls.size());;
+		while (iterator.hasPrevious()) {
+			String url = iterator.previous();
 			System.out.println(url);
 			driver.get(url);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText("mp4")));
